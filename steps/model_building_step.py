@@ -13,7 +13,7 @@ from zenml.client import Client
 
 # Get the active experiment tracker from ZenML
 experiment_tracker = Client().active_stack.experiment_tracker
-from zenml import Model
+from zenml import Model  # noqa: E402
 
 model = Model(
     name="prices_predictor",
