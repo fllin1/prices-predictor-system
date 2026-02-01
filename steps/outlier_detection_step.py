@@ -25,6 +25,6 @@ def outlier_detection_step(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
     df_numeric = df.select_dtypes(include=[int, float])
 
     outlier_detector = OutlierDetector(ZScoreOutlierDetection(threshold=3))
-    outliers = outlier_detector.detect_outliers(df_numeric)
+    outlier_detector.detect_outliers(df_numeric)
     df_cleaned = outlier_detector.handle_outliers(df_numeric, method="remove")
     return df_cleaned

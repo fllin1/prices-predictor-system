@@ -1,0 +1,23 @@
+name: CD - Pipeline Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  integration-test:
+    name: Build & Test Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        run: docker compose build
+
+      - name: Run Training Pipeline
+        run: docker compose up training

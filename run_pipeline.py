@@ -9,7 +9,7 @@ def main():
     Run the ML pipeline and start the MLflow UI for experiment tracking.
     """
     # Run the pipeline
-    run = ml_pipeline()
+    run = ml_pipeline()  # noqa: F841
 
     # You can uncomment and customize the following lines if you want to retrieve and inspect the trained model:
     # trained_model = run["model_building_step"]  # Replace with actual step name if different

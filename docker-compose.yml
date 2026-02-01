@@ -1,0 +1,15 @@
+services:
+  training:
+    build: .
+    volumes:
+      - ./mlruns:/app/mlruns
+      - ./data:/app/data
+    command: run_pipeline.py
+
+  deployment:
+    build: .
+    volumes:
+      - ./mlruns:/app/mlruns
+      - ./data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock # Required for ZenML/MLflow docker deployer if used inside
+    command: run_deployment.py

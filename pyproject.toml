@@ -18,3 +18,13 @@ dependencies = [
     "statsmodels==0.14.1",
     "zenml[server]==0.64.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
