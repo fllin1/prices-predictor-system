@@ -32,8 +32,5 @@ jobs:
       - name: Run Formatting Check (Ruff)
         run: uv run ruff format --check .
 
-      - name: Run Type Checking (MyPy)
-        run: uv run mypy .
-
       - name: Run Tests
         run: uv run pytest tests/

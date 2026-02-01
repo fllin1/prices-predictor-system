@@ -6,9 +6,10 @@ from steps.outlier_detection_step import outlier_detection_step
 def test_outlier_detection_step():
     """Test outlier detection removes rows."""
     # Create data with a clear outlier
+    # Use enough data points so Z-score detection works reliably
     df = pd.DataFrame(
         {
-            "SalePrice": [100, 102, 98, 100, 10000]  # 10000 is an outlier
+            "SalePrice": [100] * 50 + [10000]  # 10000 is an outlier
         }
     )
 

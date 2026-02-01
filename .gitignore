@@ -12,3 +12,9 @@ wheels/
 # Data
 data/
 extracted_data/
+
+# MLflow
+mlruns/*
+!mlruns/0/
+mlruns/0/*
+!mlruns/0/meta.yaml

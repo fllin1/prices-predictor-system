@@ -31,4 +31,7 @@ def feature_engineering_step(
         raise ValueError(f"Unsupported feature engineering strategy: {strategy}")
 
     transformed_df = engineer.apply_feature_engineering(df)
+    
+    if features:
+         return transformed_df[features]
     return transformed_df
