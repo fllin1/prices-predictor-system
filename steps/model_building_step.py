@@ -3,7 +3,6 @@ from typing import Annotated
 
 import mlflow
 import pandas as pd
-from sklearn.base import RegressorMixin
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LinearRegression
@@ -27,7 +26,9 @@ model = Model(
 @step(enable_cache=False, experiment_tracker=experiment_tracker.name, model=model)
 def model_building_step(
     X_train: pd.DataFrame, y_train: pd.Series
-) -> Annotated[Pipeline, ArtifactConfig(name="sklearn_pipeline", is_model_artifact=True)]:
+) -> Annotated[
+    Pipeline, ArtifactConfig(name="sklearn_pipeline", is_model_artifact=True)
+]:
     """
     Builds and trains a Linear Regression model using scikit-learn wrapped in a pipeline.
 
@@ -47,6 +48,9 @@ def model_building_step(
     # Identify categorical and numerical columns
     categorical_cols = X_train.select_dtypes(include=["object", "category"]).columns
     numerical_cols = X_train.select_dtypes(exclude=["object", "category"]).columns
+
+    # NOTE: Explicitly cast integer columns to float64 to avoid MLflow schema warnings
+    X_train[numerical_cols] = X_train[numerical_cols].astype("float64")
 
     logging.info(f"Categorical columns: {categorical_cols.tolist()}")
     logging.info(f"Numerical columns: {numerical_cols.tolist()}")
@@ -69,7 +73,9 @@ def model_building_step(
     )
 
     # Define the model training pipeline
-    pipeline = Pipeline(steps=[("preprocessor", preprocessor), ("model", LinearRegression())])
+    pipeline = Pipeline(
+        steps=[("preprocessor", preprocessor), ("model", LinearRegression())]
+    )
 
     # Start an MLflow run to log the model training process
     if not mlflow.active_run():
@@ -85,7 +91,9 @@ def model_building_step(
 
         # Log the columns that the model expects
         onehot_encoder = (
-            pipeline.named_steps["preprocessor"].transformers_[1][1].named_steps["onehot"]
+            pipeline.named_steps["preprocessor"]
+            .transformers_[1][1]
+            .named_steps["onehot"]
         )
         onehot_encoder.fit(X_train[categorical_cols])
         expected_columns = numerical_cols.tolist() + list(
