@@ -16,7 +16,9 @@ dependencies = [
     "seaborn==0.13.2",
     "setuptools>=80.10.2",
     "statsmodels==0.14.1",
+    "streamlit>=1.53.1",
     "zenml[server]==0.64.0",
+    "streamlit>=1.32.0",
 ]
 
 [dependency-groups]
