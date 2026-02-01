@@ -19,12 +19,14 @@ An End-to-End MLOps pipeline for predicting house prices, built with [ZenML](htt
     - [Using Docker Compose](#using-docker-compose)
     - [Using Docker CLI Manually](#using-docker-cli-manually)
   - [📊 Monitoring \& Dashboards](#-monitoring--dashboards)
+    - [Streamlit Dashboard](#streamlit-dashboard)
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
 ![mlflow](https://img.shields.io/badge/mlflow-%23d9ead3.svg?style=for-the-badge&logo=numpy&logoColor=blue)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![ZenML](https://img.shields.io/badge/zenml-%23460667.svg?style=for-the-badge&logo=zenml&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-%23FF4B4B.svg?style=for-the-badge&logo=Streamlit&logoColor=white)
 
 ## 📖 About the Project
 
@@ -203,3 +205,11 @@ You can also run the project using Docker to ensure a reproducible environment.
     ```bash
     zenml up
     ```
+
+### Streamlit Dashboard
+
+Explore the data, check model performance, and use the prediction service via an interactive dashboard:
+
+```bash
+uv run streamlit run dashboard.py
+```
